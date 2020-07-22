@@ -15,7 +15,7 @@ const UnBucketList = (props) => {
     console.log('PASSED PROPS TO LIST COMPONENT',props)
     return(
         <View style={styles.container}>
-             <FlatList
+             <FlatList style ={styles.entries}
             data={props.events}
             renderItem={({item}) =>(
                 console.log('item object',item),
@@ -44,11 +44,16 @@ const UnBucketList = (props) => {
 const styles = StyleSheet.create({
     container: {
         flex: .5,
-        backgroundColor: '#ecf0f1',
+        backgroundColor: '#1E90FF',
         alignItems: 'center',
         justifyContent: 'center',
         maxHeight: 500
       },
+      entries:{
+        
+     
+
+      }  
   
   });
 
