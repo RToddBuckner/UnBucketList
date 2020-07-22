@@ -1,16 +1,49 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  ScrollView,
+  FlatList,
+} from 'react-native';
+import { connect } from 'react-redux';
+import UnBucketList from './UnBucketList'
+
+
+const mapStateToProps = (state) => ({
+  events: state.unBucket.events,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  // pertinent actions here
+});
 
 const Home = (props) => {
+  console.log(props.events);
+  
+  // const eventList = [];
+  // props.events.forEach((events,i) => {
+  //   console.log(i)
+  //   eventList.push(
+  //     <UnBucketList key={`list${i}`}
+  //       eventName={events.eventName}
+  //      eventName={events.eventDetails}
+  //      eventLoc={events.eventLoc}
+  //      eventTime={events.eventTime}
+  //      participants={events.eventGuests}
+  //      id={`list${i}`}/>
+  //   )
+
+  // }) 
   return (
+    
+
     <View style={styles.container}>
       <Text>This is Home</Text>
       <br></br>
-      <View>
-        <Text>Events display here in ScrollView</Text>
-      </View>
-      <br></br>
+      <UnBucketList events={props.events}/>
+         <br></br>
       <TouchableOpacity
         onPress={() => {
           console.log('Add event pressed');
@@ -27,17 +60,6 @@ const Home = (props) => {
       >
         <Text>Edit an Event</Text>
       </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => {
-          console.log('Making fetch request');
-          fetch('https://dog.ceo/api/breeds/image/random')
-            .then((res) => res.json())
-            .then((data) => console.log('data from fetch', data))
-            .catch((err) => console.log('err in fetch', err));
-        }}
-      >
-        <Text>Fetch dogs</Text>
-      </TouchableOpacity>
     </View>
   );
 };
@@ -49,9 +71,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  scrollContainer: {
-    maxHeight: 200,
-  },
+  
 });
 
-export default Home;
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
